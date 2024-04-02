@@ -1,0 +1,44 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    background: linear-gradient(to right, #592025 10%, #2C2D30 100%), #2C2D30;
+    color: white;
+    font-size: 20px;
+    -webkit-text-stroke: 1px black; /* for Chrome and Safari */
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90vh;
+    display: flex;
+}
+
+.sidebar {
+    flex: 0 0 20%; /* this means the sidebar will not grow or shrink and will always take up 25% of the container's width */
+    background: #2C2D30; /* replace with your preferred color */
+    color: white;
+    padding: 20px;
+}
+
+.main-area {
+    flex: 1; /* this means the main area will take up the remaining space in the container */
+    background: #1E1F22; /* replace with your preferred color */
+    padding: 20px;
+}
+
+footer {
+    display: none;
+}
