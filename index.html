@@ -14,26 +14,25 @@
     
     <div class="container">
         <aside class="sidebar">
-            <!-- Add your search form and sidebar content here -->
             <div class="sidebar-search">
                 <form id="search-form">
-                <button type="submit">Search</button>
-                <div class="search-input">
-                    <label for="song">Song</label>
-                    <input type="text" id="song" name="song">
-                </div>
-                <div class="search-input">
-                    <label for="artist">Artist</label>
-                    <input type="text" id="artist" name="artist">
-                </div>
-                <div class="search-input">
-                    <label for="album">Album</label>
-                    <input type="text" id="album" name="album">
-                </div>
-                <div class="search-input">
-                    <label for="file">File</label>
-                    <input type="text" id="file" name="file">
-                </div>
+                    <button type="submit">Search</button>
+                    <div class="search-input">
+                        <label for="song">Song</label>
+                        <input type="text" id="song" name="song">
+                    </div>
+                    <div class="search-input">
+                        <label for="artist">Artist</label>
+                        <input type="text" id="artist" name="artist">
+                    </div>
+                    <div class="search-input">
+                        <label for="album">Album</label>
+                        <input type="text" id="album" name="album">
+                    </div>
+                    <div class="search-input">
+                        <label for="file">File</label>
+                        <input type="text" id="file" name="file">
+                    </div>
                 </form>
               </div>
         </aside>
@@ -46,11 +45,16 @@
                 <div class="label">Album</div>
                 <div class="label">File Name</div>
             </div>
+            <!-- template for results -->
+            <div class="result-template">
+                <div class="song-name">Example Song</div>
+                <div class="artist">Example Artist</div>
+                <div class="album">Example Album</div>
+                <div class="file-name">Example File</div>
+            </div>
         </main>
     </div>
     
-    <script>
-        // JavaScript Functionality
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
