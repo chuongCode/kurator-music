@@ -79,8 +79,8 @@ button {
     color: #000000;
     font-size: 25px;
     cursor: pointer;
-    transition: .5s;
-    border: 3px solid #A61414;
+    transition: box-shadow 0.5s ease, color 0.5s ease; /* animate the box-shadow and color */
+    box-shadow: 0 0 0 2px #A61414;
     margin-bottom: 20px;
 }
 
@@ -104,9 +104,8 @@ button:hover::before {
 
 button:hover {
     color: #A61414;
-    box-shadow: 0 0 20px #A61414;
+    box-shadow: 0 0 20px #A61414, 0 0 0 3px #bd1717; /* add the border effect as a second box shadow */
     text-shadow: 0 0 15px #A61414;
-    border: 3px solid #bd1717;
 }
 
 .results-header {
