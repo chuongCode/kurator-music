@@ -16,6 +16,7 @@ header {
     padding-left: 20px;
     display: flex;
     align-items: center;
+    font-family: 'Krona One', sans-serif;
 }
 
 .container {
@@ -24,11 +25,12 @@ header {
     width: 100%;
     height: 90vh;
     display: flex;
+    font-family: 'Krona One', sans-serif;
 }
 
 .sidebar {
     flex: 0 0 20%; /* this means the sidebar will not grow or shrink and will always take up 25% of the container's width */
-    background: #2C2D30; /* replace with your preferred color */
+    background: #2C2D30;
     color: white;
     padding: 20px;
 }
@@ -36,7 +38,7 @@ header {
 .main-area {
     flex: 1; /* this means the main area will take up the remaining space in the container */
     background: #1E1F22; 
-    padding: 20px;
+    padding-top: 5px;
 }
 
 footer {
@@ -90,14 +92,13 @@ button::before {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: #000000;
     transition: .5s;
     transform: scale(.9);
     z-index: -1;
 }
 
 button:hover::before {
-    transform: scale(1.1);
+    transform: scale(1);
     box-shadow: 0 0 15px #A61414;
 }
 
@@ -105,4 +106,19 @@ button:hover {
     color: #A61414;
     box-shadow: 0 0 20px #A61414;
     text-shadow: 0 0 15px #A61414;
+    border: 3px solid #bd1717;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #2C2D30;
+    padding: 5px;
+    color: #FFFFFF;
+    font-size: 16px;
+}
+
+.label {
+    flex: 1;
+    text-align: center;
 }
