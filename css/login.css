@@ -6,16 +6,20 @@ body {
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: #2C2D30;
+    background-color: #191919;
+    background-image: url('../images/login_bg.svg');
+    background-size: cover;
+    background-position: center;
 }
 
 .login-container {
     width: 300px;
     padding: 20px;
-    background-color: #1E1F22;
+    background-color: #242528;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 2);
 }
 
 .login-container h2 {
@@ -32,14 +36,33 @@ body {
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #fff;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+    background-color: #383838;
+}
+
+.login-container input[type="text"]:not(:focus),
+.login-container input[type="password"]:not(:focus) {
+    color: #000;
 }
 
 .login-container button {
     width: 100%;
-    padding: 10px;
-    background-color: #4CAF50;
+    padding: 15px 10px;
+    margin-top: 10px;
+    background-color: #A61414;
     color: #fff;
     border: none;
+    font-size: 12px;
     border-radius: 3px;
     cursor: pointer;
+}
+
+.login-container button:hover {
+    transform: scale(1.01); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 5);
 }
