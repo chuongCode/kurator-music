@@ -1,4 +1,8 @@
+let content = document.querySelector('#content');
 let searchForm = document.querySelector('#search-form');
+let addButton = document.querySelector('#add-button');
+let popup = document.querySelector('#popup');
+let closePopupButton = document.querySelector('#close-popup');
 
 searchForm.addEventListener('submit', function(event) {
     // prevent the default form submission
@@ -6,6 +10,12 @@ searchForm.addEventListener('submit', function(event) {
 
     // get the search query
     let searchQuery = document.querySelector('#search-query').value;
+
+    // validate the search query
+    if (!searchQuery.trim()) {
+        alert('Please enter a search query.');
+        return;
+    }
 
     // make an AJAX request to the search API
     fetch(`/api/search?query=${encodeURIComponent(searchQuery)}`)
@@ -23,4 +33,16 @@ searchForm.addEventListener('submit', function(event) {
                 resultsArea.appendChild(resultElement);
             });
         });
+});
+
+addButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    popup.classList.add('popup-visible');
+    content.classList.add('blur');
+});
+
+closePopupButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    popup.classList.remove('popup-visible');
+    content.classList.remove('blur');
 });

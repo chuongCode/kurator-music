@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Kurator Music Database</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/admin_styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -32,6 +32,7 @@
                         <label for="file">File</label>
                         <input type="text" id="file" name="file">
                     </div>
+                    <button id="add-button">Add</button>
                 </form>
               </div>
         </aside>
@@ -52,6 +53,11 @@
                 <div class="file-name">Example File</div>
             </div>
         </main>
+    </div>
+    
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <button id="close-popup">Close</button>
     </div>
     
     <script src="js/script.js"></script>
