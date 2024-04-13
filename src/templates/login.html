@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+    <link href="{{url_for('static',filename='css/login.css')}}" rel="stylesheet">
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+        <div class="login-container">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username">
+            <input type="password" placeholder="Password">
+            <button>SIGN IN</button>
+        </div>
+    {% endblock %}
+</body>
+</html>
