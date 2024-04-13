@@ -1,11 +1,10 @@
 CREATE TABLE SONG (
     Song_name VARCHAR(255),
-    Youtube_link VARCHAR(255),
     Artist VARCHAR(255),
     Album VARCHAR(255),
     Date_modified DATE,
     Date_created DATE,
-    PRIMARY KEY (Song_name, Youtube_link),
+    PRIMARY KEY (Song_name),
     FOREIGN KEY (Artist) REFERENCES ARTIST(Artist_name),
     FOREIGN KEY (Album) REFERENCES ALBUM(Album_name)
 );
@@ -29,7 +28,7 @@ CREATE TABLE ALBUM (
 
 CREATE TABLE LANGUAGE (
     Language_name VARCHAR(255) PRIMARY KEY,
-    Sno INT
+    Lno INT
 );
 
 CREATE TABLE FILE_INFO (
