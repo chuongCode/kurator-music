@@ -80,12 +80,18 @@ class SongForm(FlaskForm):
 #     netid = StringField("Enter the NetID to remove: ", validators=[DataRequired()])
 #     submit = SubmitField("Delete User")
 
+def deleteSong(song_name):
+    song = Song.query.filter_by(song_name = song_name).first()
+    if(song != None):
+        db.session.delete(song)
+        db.session.commit()
+    return render_template("admin_index.html")
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
     all_songs = Song.query.all()
-    print(all_songs[0].song_name)
     return render_template("index.html", songs = all_songs)
 
 @app.route("/login")
@@ -94,12 +100,12 @@ def login():
 
 @app.route("/admin_index", methods = ["GET", "POST"])
 def admin_index():
+    all_songs = Song.query.all()
     form = SongForm()
     if(form.validate_on_submit()):
         song_name = form.song_name.data
         artist = form.artist.data
         album = form.album.data
-        print("The song details are" + song_name + artist + album)
 
         new_song = Song(song_name = song_name, artist = artist, album = album)
         db.session.add(new_song)
@@ -107,7 +113,7 @@ def admin_index():
 
         return redirect(url_for("index"))
 
-    return render_template("admin_index.html", form = form)
+    return render_template("admin_index.html", form = form, songs = all_songs)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 

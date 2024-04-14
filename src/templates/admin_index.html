@@ -50,14 +50,24 @@
                 </div>
                 <!-- template for results -->
                 <div class="result-template">
-                    <div class="song-name">Example Song</div>
-                    <div class="artist">Example Artist</div>
-                    <div class="album">Example Album</div>
+                    {% for song in songs %}
+                    <div class="song-name">{{song.song_name}}</div>
+                    <div class="artist">{{song.artist}}</div>
+                    <div class="album">{{song.album}}</div>
                     <div class="file-name">Example File</div>
                     <div class="result-button-container">
                         <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
-                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                        <form id="delete-form" action="/deleteSong" method="POST">
+                            <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                        </form>
                     </div>
+                    {% endfor %}
+                    <!-- <div class="result-button-container">
+                        <form id="delete-form" action="/deleteSong" method="POST">
+                            <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                    </div> -->
                 </div>
             </main>
         </div>
