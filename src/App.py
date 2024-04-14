@@ -76,16 +76,13 @@ class SongForm(FlaskForm):
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# class DeleteForm(FlaskForm):
-#     netid = StringField("Enter the NetID to remove: ", validators=[DataRequired()])
-#     submit = SubmitField("Delete User")
-
+@app.route("/deleteSong/<song_name>", methods=["POST"])
 def deleteSong(song_name):
     song = Song.query.filter_by(song_name = song_name).first()
     if(song != None):
         db.session.delete(song)
         db.session.commit()
-    return render_template("admin_index.html")
+    return render_template("admin_index.html", form = SongForm(), songs = Song.query)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -100,8 +97,26 @@ def login():
 
 @app.route("/admin_index", methods = ["GET", "POST"])
 def admin_index():
-    all_songs = Song.query.all()
+    all_songs = Song.query
     form = SongForm()
+
+    search_term_song = request.args.get('search_song', '')
+    search_term_artist = request.args.get('search_artist', '')
+    search_term_album = request.args.get('search_album', '')
+    search_term_file = request.args.get('search_file', '')
+    if search_term_song:
+        print("AAA")
+        all_songs = all_songs.filter(Song.song_name.ilike(f"%{search_term_song}%"))
+    if search_term_artist:
+        print("BBB")
+        all_songs = all_songs.filter(Song.artist.ilike(f"%{search_term_artist}%"))
+    if search_term_album:
+        print("CCC")
+        all_songs = all_songs.filter(Song.album.ilike(f"%{search_term_album}%"))
+    if search_term_file:
+        print("DDD")
+        all_songs = all_songs.filter(Song.file.ilike(f"%{search_term_file}%"))
+
     if(form.validate_on_submit()):
         song_name = form.song_name.data
         artist = form.artist.data

@@ -16,23 +16,23 @@
         <div id="content" class="container">
             <aside class="sidebar">
                 <div class="sidebar-search">
-                    <form id="search-form"> <!-- add action and method attributes -->
+                    <form id="search-form" action="{{ url_for('admin_index') }}" method="GET"> <!-- add action and method attributes -->
                         <button type="submit">Search</button>
                         <div class="search-input">
                             <label for="song">Song</label>
-                            <input type="text" id="song" name="song">
+                            <input type="text" id="song" name="search_song" value="{{ search_song }}">
                         </div>
                         <div class="search-input">
                             <label for="artist">Artist</label>
-                            <input type="text" id="artist" name="artist">
+                            <input type="text" id="artist" name="search_artist" value="{{ search_artist }}">
                         </div>
                         <div class="search-input">
                             <label for="album">Album</label>
-                            <input type="text" id="album" name="album">
+                            <input type="text" id="album" name="search_album" value="{{ search_album }}">
                         </div>
                         <div class="search-input">
                             <label for="file">File</label>
-                            <input type="text" id="file" name="file">
+                            <input type="text" id="file" name="search_file" value="{{ search_file }}">
                         </div>
                         <button id="add-button">Add</button>
                     </form>
@@ -49,26 +49,20 @@
                     <div class="label">Options</div>
                 </div>
                 <!-- template for results -->
-                <div class="result-template">
-                    {% for song in songs %}
+                {% for song in songs %}
+                    <div class="result-template">
                     <div class="song-name">{{song.song_name}}</div>
                     <div class="artist">{{song.artist}}</div>
                     <div class="album">{{song.album}}</div>
                     <div class="file-name">Example File</div>
                     <div class="result-button-container">
-                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
-                        <form id="delete-form" action="/deleteSong" method="POST">
+                        <button class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <form id="delete-form" action="{{ url_for('deleteSong', song_name=song.song_name) }}" method="POST">
                             <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </div>
-                    {% endfor %}
-                    <!-- <div class="result-button-container">
-                        <form id="delete-form" action="/deleteSong" method="POST">
-                            <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
-                        </form>
-                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
-                    </div> -->
-                </div>
+                    </div>
+                {% endfor %}
             </main>
         </div>
         
