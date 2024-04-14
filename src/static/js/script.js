@@ -1,8 +1,13 @@
 let content = document.querySelector('#content');
 let searchForm = document.querySelector('#search-form');
 let addButton = document.querySelector('#add-button');
-let popup = document.querySelector('#popup');
-let closePopupButton = document.querySelector('#close-popup');
+let addPopup = document.querySelector('#add-popup');
+let closeAddPopupButton = document.querySelector('#close-add-popup');
+// Edit button and popup
+let editButton = document.querySelector('#edit-button');
+let editButtons = document.querySelectorAll('.edit-button');
+let editPopup = document.querySelector('#edit-popup');
+let closeEditPopupButton = document.querySelector('#close-edit-popup');
 
 searchForm.addEventListener('submit', function(event) {
     // prevent the default form submission
@@ -37,12 +42,42 @@ searchForm.addEventListener('submit', function(event) {
 
 addButton.addEventListener('click', function(event) {
     event.preventDefault();
-    popup.classList.add('popup-visible');
+    addPopup.classList.add('popup-visible');
     content.classList.add('blur');
 });
 
-closePopupButton.addEventListener('click', function(event) {
+closeAddPopupButton.addEventListener('click', function(event) {
     event.preventDefault();
-    popup.classList.remove('popup-visible');
+    addPopup.classList.remove('popup-visible');
     content.classList.remove('blur');
+});
+
+// Edit button event listeners
+editButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    editPopup.classList.add('popup-visible');
+    content.classList.add('blur');
+});
+
+closeEditPopupButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    editPopup.classList.remove('popup-visible');
+    content.classList.remove('blur');
+});
+
+editButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        let result = button.parentElement.parentElement;
+        let song = result.querySelector('.song-name').textContent;
+        let artist = result.querySelector('.artist').textContent;
+        let album = result.querySelector('.album').textContent;
+        let file = result.querySelector('.file-name').textContent;
+
+        document.getElementById('edit-song').value = song;
+        document.getElementById('edit-artist').value = artist;
+        document.getElementById('edit-album').value = album;
+        document.getElementById('edit-file').value = file;
+
+        document.getElementById('editPopup').style.display = 'block';
+    });
 });

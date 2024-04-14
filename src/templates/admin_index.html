@@ -4,6 +4,8 @@
 <head>
     {% block head %}
     <link href="{{url_for('static',filename='css/admin_styles.css')}}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Krona+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     {% endblock %}
 </head>
 <body>
@@ -44,6 +46,7 @@
                     <div class="label">Artist(s)</div>
                     <div class="label">Album</div>
                     <div class="label">File Name</div>
+                    <div class="label">Options</div>
                 </div>
                 <!-- template for results -->
                 <div class="result-template">
@@ -51,44 +54,195 @@
                     <div class="artist">Example Artist</div>
                     <div class="album">Example Album</div>
                     <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </div>
+                <div class="result-template">
+                    <div class="song-name">Example Song</div>
+                    <div class="artist">Example Artist</div>
+                    <div class="album">Example Album</div>
+                    <div class="file-name">Example File</div>
+                    <div class="result-button-container">
+                        <button id="edit-button" class="results-button edit-button"><i class="fas fa-pencil-alt"></i></button>
+                        <button class="results-button delete-button"><i class="fas fa-trash-alt"></i></button>
+                    </div>
                 </div>
             </main>
         </div>
         
-        <!-- Popup -->
-        <div id="popup" class="popup">
+        <!-- Add Popup -->
+        <div id="add-popup" class="popup">
             <div class="form-container">
                 <div>
                     <h2>Add Entry</h2>
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-song">Song</label>
                     <input type="text" id="add-song" name="song">
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-artist">Artist</label>
                     <input type="text" id="add-artist" name="artist">
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-album">Album</label>
                     <input type="text" id="add-album" name="album">
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-file">File</label>
                     <input type="text" id="add-file" name="file">
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-date-mod">Date Modified</label>
                     <input type="text" id="add-date-mod" name="file">
                 </div>
-                <div class="add-input">
+                <div class="input">
                     <label for="add-date-created">Date Created</label>
                     <input type="text" id="add-date-created" name="file">
                 </div>
             </div>
             <div class="button-container">
-                <button id="close-popup">Cancel</button>
-                <button id="confirm-add">Confirm Add</button>
+                <button id="close-add-popup">Cancel</button>
+                <button id="confirm-add">Confirm</button>
+            </div>
+        </div>
+
+        <!-- Edit Popup -->
+        <div id="edit-popup" class="popup">
+            <div class="form-container">
+                <div>
+                    <h2>Edit Entry</h2>
+                </div>
+                <div class="edit-input">
+                    <label for="edit-song">Song</label>
+                    <input type="text" id="edit-song" name="song">
+                </div>
+                <div class="input">
+                    <label for="edit-artist">Artist</label>
+                    <input type="text" id="edit-artist" name="artist">
+                </div>
+                <div class="input">
+                    <label for="edit-album">Album</label>
+                    <input type="text" id="edit-album" name="album">
+                </div>
+                <div class="input">
+                    <label for="edit-file">File</label>
+                    <input type="text" id="edit-file" name="file">
+                </div>
+                <div class="input">
+                    <label for="edit-date-mod">Date Modified</label>
+                    <input type="text" id="edit-date-mod" name="file">
+                </div>
+                <div class="input">
+                    <label for="edit-date-created">Date Created</label>
+                    <input type="text" id="edit-date-created" name="file">
+                </div>
+            </div>
+            <div class="button-container">
+                <button id="close-edit-popup">Cancel</button>
+                <button id="confirm-edit">Confirm</button>
             </div>
         </div>
         
