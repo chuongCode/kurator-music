@@ -77,7 +77,5 @@ editButtons.forEach(function(button) {
         document.getElementById('edit-artist').value = artist;
         document.getElementById('edit-album').value = album;
         document.getElementById('edit-file').value = file;
-
-        document.getElementById('editPopup').style.display = 'block';
     });
 });
