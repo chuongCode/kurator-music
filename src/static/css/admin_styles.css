@@ -56,7 +56,6 @@ footer {
 
 label {
     display: block;
-    margin-bottom: 5px;
     font-size: 22px;
 }
 
@@ -190,6 +189,10 @@ button:hover {
     padding: 10px;
 }
 
+.krona-one {
+    font-family: 'Krona One', sans-serif;
+}
+
 .popup h2 {
     text-align: center;
     color: #FFFFFF;
@@ -231,10 +234,11 @@ button:hover {
     height: 30px;
 }
 
-.popup label {
+.popup li {
     color: #FFFFFF;
     font-family: 'Krona One', sans-serif;
     font-size: 14px;
+    list-style-type: none
 }
 
 .blur {
