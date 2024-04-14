@@ -69,10 +69,10 @@ class FileInfo(db.Model):
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 class SongForm(FlaskForm):
-    song_name = StringField("Song", validators=[DataRequired()])
-    artist = StringField("Artist", validators=[DataRequired()])
-    album = StringField("Album", validators=[DataRequired()])
-    submit = SubmitField("Continue")
+    song_name = StringField("Song")
+    artist = StringField("Artist")
+    album = StringField("Album")
+    submit = SubmitField("Submit")
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
@@ -84,25 +84,28 @@ class SongForm(FlaskForm):
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
-    return render_template("index.html")
+    all_songs = Song.query.all()
+    print(all_songs[0].song_name)
+    return render_template("index.html", songs = all_songs)
 
 @app.route("/login")
 def login():
     return render_template("login.html")
 
-@app.route("/admin_index")
+@app.route("/admin_index", methods = ["GET", "POST"])
 def admin_index():
     form = SongForm()
     if(form.validate_on_submit()):
         song_name = form.song_name.data
         artist = form.artist.data
         album = form.album.data
+        print("The song details are" + song_name + artist + album)
 
         new_song = Song(song_name = song_name, artist = artist, album = album)
         db.session.add(new_song)
         db.session.commit()
 
-        return redirect(url_for("admin_index"))
+        return redirect(url_for("index"))
 
     return render_template("admin_index.html", form = form)
 

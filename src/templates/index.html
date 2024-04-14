@@ -46,10 +46,12 @@
                 </div>
                 <!-- template for results -->
                 <div class="result-template">
-                    <div class="song-name">Example Song</div>
-                    <div class="artist">Example Artist</div>
-                    <div class="album">Example Album</div>
-                    <div class="file-name">Example File</div>
+                    {% for song in songs %}
+                    <div class="song-name">{{song.song_name}}</div>
+                    <div class="artist">{{song.artist}}</div>
+                    <div class="album">{{song.album}}</div>
+                    <!-- <div class="file-name">Example File</div> -->
+                    {% endfor %}
                 </div>
             </main>
         </div>
