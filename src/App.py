@@ -6,6 +6,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
+import csv
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -31,6 +33,11 @@ class Song(db.Model):
 
     artist_rel = db.relationship('Artist', backref='songs')
     album_rel = db.relationship('Album', backref='songs')
+
+    def modify(self, artist, album):
+        self.artist = artist
+        self.album = album
+        db.session.commit()
 
 class Artist(db.Model):
     __tablename__ = 'artist'
@@ -84,11 +91,70 @@ def deleteSong(song_name):
         db.session.commit()
     return render_template("admin_index.html", form = SongForm(), songs = Song.query)
 
+@app.route("/modifySong/<song_name>", methods=["POST"])
+def modifySong(song_name):
+    song = Song.query.filter_by(song_name=song_name).first()
+    if song is not None:
+        artist = request.form.get('artist')
+        album = request.form.get('album')
+        song.modify(artist, album)
+    return redirect(url_for('admin_index'))
+
+@app.route('/populate_songs')
+def populate_songs():
+    with open('song_entries.csv', 'r', encoding='utf-8') as csvfile:
+        csvreader = csv.reader(csvfile)
+        next(csvreader)  # Skip header row
+        for row in csvreader:
+            song_name, artist, album, date_modified, date_created = row
+            song = Song(
+                song_name=song_name,
+                artist=artist,
+                album=album,
+                date_modified=float(date_modified),
+                date_created=float(date_created)
+            )
+            db.session.add(song)
+
+    db.session.commit()
+    return 'Songs populated successfully'
+
+@app.route('/populate_artists')
+def populate_artists():
+    with open('artist_entries.csv', 'r', encoding='utf-8') as csvfile:
+        csvreader = csv.reader(csvfile)
+        next(csvreader)  # Skip header row
+        for row in csvreader:
+            artist_name, language = row
+            artist = Artist(
+                artist_name=artist_name,
+                language=language
+            )
+            db.session.add(artist)
+
+    db.session.commit()
+    return 'Artists populated successfully'
+
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 @app.route("/", methods = ["GET", "POST"])
 def index():
-    all_songs = Song.query.all()
+    all_songs = Song.query
+
+    search_term_song = request.args.get('search_song', '')
+    search_term_artist = request.args.get('search_artist', '')
+    search_term_album = request.args.get('search_album', '')
+    search_term_file = request.args.get('search_file', '')
+    if search_term_song:
+        all_songs = all_songs.filter(Song.song_name.ilike(f"%{search_term_song}%"))
+    if search_term_artist:
+        all_songs = all_songs.filter(Song.artist.ilike(f"%{search_term_artist}%"))
+    if search_term_album:
+        all_songs = all_songs.filter(Song.album.ilike(f"%{search_term_album}%"))
+    if search_term_file:
+        all_songs = all_songs.filter(Song.file.ilike(f"%{search_term_file}%"))
+
     return render_template("index.html", songs = all_songs)
 
 @app.route("/login")
@@ -126,15 +192,15 @@ def admin_index():
         db.session.add(new_song)
         db.session.commit()
 
-        return redirect(url_for("index"))
+        return redirect(url_for("admin_index"))
 
     return render_template("admin_index.html", form = form, songs = all_songs)
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
-# @app.before_first_request
-# def create_tables():
-#     db.create_all()
+@app.before_first_request
+def create_tables():
+    db.create_all()
 
 if __name__ == '__main__':
     app.run(debug=True)
