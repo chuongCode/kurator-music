@@ -6,8 +6,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
-import csv
-
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -99,42 +97,6 @@ def modifySong(song_name):
         album = request.form.get('album')
         song.modify(artist, album)
     return redirect(url_for('admin_index'))
-
-@app.route('/populate_songs')
-def populate_songs():
-    with open('song_entries.csv', 'r', encoding='utf-8') as csvfile:
-        csvreader = csv.reader(csvfile)
-        next(csvreader)  # Skip header row
-        for row in csvreader:
-            song_name, artist, album, date_modified, date_created = row
-            song = Song(
-                song_name=song_name,
-                artist=artist,
-                album=album,
-                date_modified=float(date_modified),
-                date_created=float(date_created)
-            )
-            db.session.add(song)
-
-    db.session.commit()
-    return 'Songs populated successfully'
-
-@app.route('/populate_artists')
-def populate_artists():
-    with open('artist_entries.csv', 'r', encoding='utf-8') as csvfile:
-        csvreader = csv.reader(csvfile)
-        next(csvreader)  # Skip header row
-        for row in csvreader:
-            artist_name, language = row
-            artist = Artist(
-                artist_name=artist_name,
-                language=language
-            )
-            db.session.add(artist)
-
-    db.session.commit()
-    return 'Artists populated successfully'
-
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
