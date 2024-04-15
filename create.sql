@@ -1,14 +1,14 @@
 CREATE TABLE IF NOT EXISTS LANGUAGE (
     Language_name VARCHAR(32),
-    Song_no INT,
+    Song_no INT DEFAULT 0,
     PRIMARY KEY (Language_name)
 );
 
 CREATE TABLE IF NOT EXISTS ARTIST (
     Artist_name VARCHAR(64),
     Language_name VARCHAR(32),
-    Song_no INT,
-    Album_no INT,
+    Song_no INT DEFAULT 0,
+    Album_no INT DEFAULT 0,
     PRIMARY KEY (Artist_name),
     FOREIGN KEY (Language_name) REFERENCES LANGUAGE(Language_name) ON DELETE SET NULL
 );
@@ -17,8 +17,8 @@ CREATE TABLE IF NOT EXISTS ALBUM (
     Album_name VARCHAR(128),
     Artist_name VARCHAR(64),
     Language_name VARCHAR(32),
-    Year INT,
-    Song_no INT,
+    Year INT DEFAULT 0,
+    Song_no INT DEFAULT 0,
     PRIMARY KEY (Album_name, Artist_name),
     FOREIGN KEY (Artist_name) REFERENCES ARTIST(Artist_name) ON DELETE CASCADE,
     FOREIGN KEY (Language_name) REFERENCES LANGUAGE(Language_name) ON DELETE SET NULL
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS SONG (
     Song_name VARCHAR(128),
     Artist_name VARCHAR(64),
     Album_name VARCHAR(128),
-    Date_modified DATE,
-    Date_created DATE,
+    Date_modified DECIMAL,
+    Date_created DECIMAL,
     PRIMARY KEY (Song_name),
     FOREIGN KEY (Artist_name) REFERENCES ARTIST(Artist_name) ON DELETE CASCADE,
     FOREIGN KEY (Album_name) REFERENCES ALBUM(Album_name) ON DELETE CASCADE
@@ -54,14 +54,6 @@ CREATE TRIGGER UPDATE_SONG_NO_AFTER_INSERT
 AFTER INSERT ON SONG
 FOR EACH ROW
 BEGIN
-    UPDATE ARTIST
-    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ARTIST.Artist_name = SONG.Artist_name)
-    WHERE ARTIST.Artist_name = NEW.Artist_name;
-
-    UPDATE ALBUM
-    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ALBUM.Album_name = SONG.Album_name)
-    WHERE ALBUM.Album_name = NEW.Album_name;
-
     UPDATE LANGUAGE
     SET Song_no = (
         SELECT COUNT(*) 
@@ -74,6 +66,14 @@ BEGIN
         FROM ALBUM 
         WHERE ALBUM.Album_name = NEW.Album_name
     );
+
+    UPDATE ARTIST
+    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ARTIST.Artist_name = SONG.Artist_name)
+    WHERE ARTIST.Artist_name = NEW.Artist_name;
+
+    UPDATE ALBUM
+    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ALBUM.Album_name = SONG.Album_name)
+    WHERE ALBUM.Album_name = NEW.Album_name;
 END;
 //
 
@@ -82,14 +82,6 @@ CREATE TRIGGER UPDATE_SONG_NO_AFTER_DELETE
 AFTER DELETE ON SONG
 FOR EACH ROW
 BEGIN
-    UPDATE ARTIST
-    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ARTIST.Artist_name = SONG.Artist_name)
-    WHERE ARTIST.Artist_name = OLD.Artist_name;
-
-    UPDATE ALBUM
-    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ALBUM.Album_name = SONG.Album_name)
-    WHERE ALBUM.Album_name = OLD.Album_name;
-
     UPDATE LANGUAGE
     SET Song_no = (
         SELECT COUNT(*) 
@@ -102,6 +94,14 @@ BEGIN
         FROM ALBUM 
         WHERE ALBUM.Album_name = OLD.Album_name
     );
+
+    UPDATE ARTIST
+    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ARTIST.Artist_name = SONG.Artist_name)
+    WHERE ARTIST.Artist_name = OLD.Artist_name;
+
+    UPDATE ALBUM
+    SET Song_no = (SELECT COUNT(*) FROM SONG WHERE ALBUM.Album_name = SONG.Album_name)
+    WHERE ALBUM.Album_name = OLD.Album_name;
 END;
 //
 
